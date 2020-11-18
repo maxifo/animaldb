@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Animals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+<body>
+<h1 th:text="#{welcome.message}"></h1>
+	<h2>Animals &nbsp; <a href ="/typelist" class="btn btn-primary">Types</a></h2> 
+	<table>
+		<tr>
+			<th th:text="#{species}"></th>
+			<th th:text="#{origin}"></th>
+			<th th:text="#{type}"></th>
+		</tr>
+		
+		<tr th:each="animal : ${animals}">
+		<td th:text="${animal.species}"></td> 
+		<td th:text="${animal.origin}"></td> 
+		<td th:text="${animal.type.name}"></td> 
+		<td sec:authorize="hasAuthority('ADMIN')"><a
+th:href="@{/delete/{id}(id=${animal.id})}">Delete</a></td>
+<td sec:authorize="hasAuthority('ADMIN')"><a
+		  th:href="@{/edit/{id}(id=${animal.id})}">Edit</a>
+		</tr>
+		
+	</table>
+	
+	<a href ="/add" class="btn btn-primary">Add new animal</a>
+	<a href ="/addtype" class="btn btn-primary">Add new type</a>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+    <span th:text="#{change.language}"></span><br>
+    <button type="button" th:text="#{lang.eng}" onclick="window.location.href='http://localhost:8080/animals?lang=en'"></button>
+    <button type="button" th:text="#{lang.fi}" onclick="window.location.href='http://localhost:8080/animals?lang=fi'"></button>  
+</body>
+</html>

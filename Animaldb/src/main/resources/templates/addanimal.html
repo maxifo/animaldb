@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Animaldb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	
+	<h2 th:text="#{addanimal}"></h2>
+	<a href ="/animals" class="btn btn-primary">Back</a>
+	<form th:object="${animal}" th:action="@{save}" action ="#" method ="post">
+	<label  th:text="#{species}">Species</label>
+	<input type ="text" id="species" th:field="*{species}" class="form-control"/>
+	<div style="clear: both; display: block; height: 10px;" ></div>
+	<label th:text="#{origin}">Origin</label>
+	<input type ="text" id="origin" th:field="*{origin}" class="form-control"/>
+	<div style="clear: both; display: block; height: 10px;" ></div>
+
+	
+	<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label th:text="#{type}">Type</label>
+			 <select id="typelist" th:field="*{type}" class="form-control">
+       			<option th:each="type: ${types}" th:value="${type.typeid}" th:text="${type.name}"></option>
+    		</select>
+			
+	<div style ="clear: both; display: block; height: 10px;"></div>
+	<input type ="submit" class= "btn btn-primary" value="Save"></input>
+	</form>
+	
+
+</body>
+</html>
